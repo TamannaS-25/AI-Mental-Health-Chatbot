@@ -36,10 +36,10 @@ def train_model():
     # Stratify to ensure all classes are in train/test if possible
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
     
-    # 5. Train Model (Naive Bayes)
-    print("Training model (Naive Bayes)...")
-    from sklearn.naive_bayes import MultinomialNB
-    model = MultinomialNB()
+    # 5. Train Model (Logistic Regression)
+    print("Training model (Logistic Regression)...")
+    from sklearn.linear_model import LogisticRegression
+    model = LogisticRegression(class_weight='balanced', random_state=42)
     model.fit(X_train, y_train)
     
     # 6. Evaluate

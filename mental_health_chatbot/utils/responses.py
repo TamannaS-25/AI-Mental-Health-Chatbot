@@ -75,17 +75,12 @@ def check_crisis(text):
 
 def get_response(emotion):
     """
-    Returns a random empathetic response based on the emotion.
-    Also appends a coping technique sometimes.
+    Returns a tuple: (empathetic_response, coping_technique)
     """
     emotion = emotion.lower()
     if emotion not in RESPONSES:
-        return "I'm listening. Tell me more."
+        return "I'm listening. Tell me more.", None
     
     base_response = random.choice(RESPONSES[emotion])
-    
-    # Randomly add a coping technique (30% chance)
-    if random.random() < 0.3 and emotion in COPING_TECHNIQUES:
-        base_response += f"\n\n**Tip:** {COPING_TECHNIQUES[emotion]}"
-        
-    return base_response
+    tip = COPING_TECHNIQUES.get(emotion, None)
+    return base_response, tip

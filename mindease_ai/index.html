@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindEase AI — Your Companion for Mental Well-being</title>
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="light-theme">
+  
+  <!-- Floating Gradient Background Blobs -->
+  <div class="background-blob blob-1"></div>
+  <div class="background-blob blob-2"></div>
+  <div class="background-blob blob-3"></div>
+
+  <!-- VIEW 1: LANDING PAGE -->
+  <section id="landing-view" class="view-section active">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <i data-lucide="brain-circuit" class="logo-icon"></i>
+          <span>MindEase AI</span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#resources">Resources</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button id="theme-toggle-btn" class="icon-btn" title="Toggle Theme">
+            <i data-lucide="moon"></i>
+          </button>
+          <button class="btn btn-secondary login-btn" onclick="appRouter.navigateTo('chat')">Login</button>
+          <button class="btn btn-primary start-btn" onclick="appRouter.navigateTo('chat')">Start Free</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-container">
+      <div class="hero-content">
+        <span class="badge">Your Safe & Private Space</span>
+        <h1 class="hero-title">Your AI Companion for Better Mental Well-being.</h1>
+        <p class="hero-subtitle">Private, compassionate, and available 24/7 to help you reflect, manage stress, and build healthier habits in a supportive space.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-lg btn-primary" onclick="appRouter.navigateTo('chat')">
+            Start Conversation
+            <i data-lucide="arrow-right"></i>
+          </button>
+          <button class="btn btn-lg btn-secondary" onclick="document.getElementById('features-section').scrollIntoView({behavior: 'smooth'})">
+            Learn More
+          </button>
+        </div>
+        <div class="trust-indicator">
+          <i data-lucide="shield-check" class="trust-icon"></i>
+          <span>100% Encrypted & Private. No medical records.</span>
+        </div>
+      </div>
+      <div class="hero-illustration">
+        <img src="assets/hero_illustration.png" alt="Mindfulness Meditating Illustration" class="floating-img">
+      </div>
+    </div>
+
+    <!-- Features Quick Scroll Section -->
+    <div id="features-section" class="landing-features">
+      <div class="section-header">
+        <h2>Features Designed for Your Peace of Mind</h2>
+        <p>MindEase AI combines conversational support with science-backed mindfulness practices.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon-wrapper blue">
+            <i data-lucide="message-square"></i>
+          </div>
+          <h3>Empathetic Chat</h3>
+          <p>Talk through feelings, process stress, and receive supportive, therapeutic dialogue anytime.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrapper lavender">
+            <i data-lucide="activity"></i>
+          </div>
+          <h3>Mood & Stress Analytics</h3>
+          <p>Log daily moods and visualize triggers, patterns, and stress metrics over time.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrapper green">
+            <i data-lucide="wind"></i>
+          </div>
+          <h3>Guided Breathing</h3>
+          <p>Calm your nervous system immediately using our interactive 4-7-8 breathing circle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW 2: APP WORKSPACE (CHAT & DASHBOARD FRAME) -->
+  <section id="app-view" class="view-section hidden">
+    <div class="app-container">
+      
+      <!-- App Left Sidebar -->
+      <aside class="app-sidebar">
+        <div class="sidebar-header">
+          <div class="logo">
+            <i data-lucide="brain-circuit" class="logo-icon"></i>
+            <span>MindEase AI</span>
+          </div>
+        </div>
+        
+        <button class="new-chat-btn" id="new-chat-trigger">
+          <i data-lucide="plus"></i>
+          <span>New Conversation</span>
+        </button>
+
+        <nav class="sidebar-menu">
+          <a href="#" class="menu-item active" data-target="chat">
+            <i data-lucide="message-circle"></i>
+            <span>Conversational Chat</span>
+          </a>
+          <a href="#" class="menu-item" data-target="dashboard">
+            <i data-lucide="layout-dashboard"></i>
+            <span>Wellness Dashboard</span>
+          </a>
+          <a href="#" class="menu-item" data-target="mood">
+            <i data-lucide="smile"></i>
+            <span>Mood Tracker</span>
+          </a>
+          <a href="#" class="menu-item" data-target="breathing">
+            <i data-lucide="wind"></i>
+            <span>Breathing Exercises</span>
+          </a>
+          <a href="#" class="menu-item" data-target="journal">
+            <i data-lucide="book-open"></i>
+            <span>Daily Journal</span>
+          </a>
+          <a href="#" class="menu-item" data-target="activities">
+            <i data-lucide="sparkles"></i>
+            <span>Mindfulness Library</span>
+          </a>
+          <a href="#" class="menu-item" data-target="profile">
+            <i data-lucide="user"></i>
+            <span>My Profile & Goals</span>
+          </a>
+          <a href="#" class="menu-item emergency-menu-item" data-target="emergency">
+            <i data-lucide="phone-call"></i>
+            <span>Emergency Support</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button id="app-theme-toggle" class="sidebar-action-btn" title="Toggle Theme">
+            <i data-lucide="moon" class="theme-icon"></i>
+            <span class="theme-text">Dark Mode</span>
+          </button>
+          <a href="#" class="menu-item" onclick="appRouter.navigateTo('landing')">
+            <i data-lucide="log-out"></i>
+            <span>Sign Out</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main Panel Workspace -->
+      <main class="app-main">
+        
+        <!-- App Top Header -->
+        <header class="app-header">
+          <div class="header-breadcrumb">
+            <span id="current-view-title">Conversational Chat</span>
+          </div>
+          <div class="header-user">
+            <span class="notification-badge"><i data-lucide="bell"></i><span class="dot"></span></span>
+            <div class="user-avatar-trigger" onclick="appRouter.switchSubView('profile')">
+              <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Tamanna" alt="User Avatar" class="user-img">
+              <span class="user-name">Tamanna</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Dynamic Content Window -->
+        <div class="app-workspace-content">
+          
+          <!-- SECTION 2A: CHAT VIEW -->
+          <div id="view-chat" class="sub-view active">
+            <div class="chat-layout">
+              <!-- Center Chat Window -->
+              <div class="chat-window">
+                <div class="chat-messages-container" id="chat-messages">
+                  <!-- Messages will be populated by JS -->
+                </div>
+                
+                <!-- Chat Input Area -->
+                <div class="chat-input-area">
+                  <div class="suggested-replies" id="suggested-replies-container">
+                    <!-- Quick replies dynamically generated -->
+                  </div>
+                  <div class="chat-input-box">
+                    <button class="input-action-btn" id="attach-file-btn" title="Upload File">
+                      <i data-lucide="paperclip"></i>
+                    </button>
+                    <textarea id="chat-input-field" placeholder="How are you feeling today? Share your thoughts..." rows="1"></textarea>
+                    <button class="input-action-btn" id="voice-input-btn" title="Voice Input">
+                      <i data-lucide="mic"></i>
+                    </button>
+                    <button class="input-action-btn" id="emoji-picker-btn" title="Add Emoji">
+                      <i data-lucide="smile"></i>
+                    </button>
+                    <button class="send-message-btn" id="send-message-btn" title="Send Message">
+                      <i data-lucide="send"></i>
+                    </button>
+                  </div>
+                  <div class="input-disclaimer">
+                    MindEase Companion is an AI assistant, not a replacement for professional clinical care.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Chat Right Sidebar (Contextual Insights) -->
+              <div class="chat-context-panel">
+                <div class="context-header">
+                  <h3>Real-time Insights</h3>
+                </div>
+                
+                <!-- Live indicators -->
+                <div class="glass-card insight-metric-card">
+                  <div class="metric-info">
+                    <span class="label">Current Mood</span>
+                    <span class="value" id="chat-mood-val">Neutral</span>
+                  </div>
+                  <div class="metric-icon-bg neutral" id="chat-mood-icon-bg">
+                    <i data-lucide="meh" id="chat-mood-icon"></i>
+                  </div>
+                </div>
+
+                <div class="glass-card insight-metric-card">
+                  <div class="metric-info">
+                    <span class="label">Stress Level</span>
+                    <span class="value" id="chat-stress-val">Low</span>
+                  </div>
+                  <div class="metric-icon-bg low" id="chat-stress-icon-bg">
+                    <i data-lucide="activity"></i>
+                  </div>
+                </div>
+
+                <!-- Coping Advice Box -->
+                <div class="coping-tip-container hidden" id="chat-context-tip-box">
+                  <div class="tip-card-header">
+                    <i data-lucide="sparkles" class="icon-sparkle"></i>
+                    <span>Personalized Coping Tip</span>
+                  </div>
+                  <p id="chat-context-tip-text">Try deep breathing exercises to help settle stress.</p>
+                  <button class="btn btn-secondary btn-sm" onclick="appRouter.switchSubView('breathing')">Try Breathing Exercise</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2B: DASHBOARD VIEW -->
+          <div id="view-dashboard" class="sub-view">
+            <div class="dashboard-grid">
+              
+              <!-- Metrics Cards -->
+              <div class="dashboard-row-metrics">
+                <div class="glass-card dashboard-metric">
+                  <div class="metric-title">Wellness Score</div>
+                  <div class="score-container">
+                    <div class="circular-progress" id="wellness-progress">
+                      <span class="progress-value">84%</span>
+                    </div>
+                  </div>
+                  <p class="metric-desc">Your emotional wellness is on a positive trend!</p>
+                </div>
+
+                <div class="glass-card dashboard-metric">
+                  <div class="metric-header-row">
+                    <div class="metric-title">Daily Mood</div>
+                    <i data-lucide="heart" class="icon-accent-red"></i>
+                  </div>
+                  <div class="large-mood-display">
+                    <span class="emoji">😌</span>
+                    <span class="mood-lbl">Calm</span>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="appRouter.switchSubView('mood')">Update Mood</button>
+                </div>
+
+                <div class="glass-card dashboard-metric">
+                  <div class="metric-header-row">
+                    <div class="metric-title">Stress Gauge</div>
+                    <i data-lucide="gauge" class="icon-accent-blue"></i>
+                  </div>
+                  <div class="stress-display">
+                    <span class="stress-val">Medium</span>
+                    <div class="stress-bar-container">
+                      <div class="stress-bar medium"></div>
+                    </div>
+                  </div>
+                  <p class="metric-desc">Slightly elevated stress. Consider a guided exercise.</p>
+                </div>
+
+                <div class="glass-card dashboard-metric">
+                  <div class="metric-header-row">
+                    <div class="metric-title">Meditation Minutes</div>
+                    <i data-lucide="clock" class="icon-accent-green"></i>
+                  </div>
+                  <div class="stat-large-val">
+                    <span>45</span>
+                    <span class="unit">min</span>
+                  </div>
+                  <p class="metric-desc">Goal: 60 min. You are 75% there this week!</p>
+                </div>
+              </div>
+
+              <!-- Main Charts Row -->
+              <div class="dashboard-row-charts">
+                <!-- Mood Trends Chart -->
+                <div class="glass-card chart-card large-chart">
+                  <div class="card-header-actions">
+                    <h3>Weekly Mood Trends</h3>
+                    <span class="badge badge-accent">Past 7 Days</span>
+                  </div>
+                  <div class="chart-canvas-container">
+                    <canvas id="moodTrendsChart"></canvas>
+                  </div>
+                </div>
+
+                <!-- Extra stats: Journal Streak, Sleep -->
+                <div class="glass-card extra-stats-card">
+                  <h3>Mindfulness Progress</h3>
+                  <div class="progress-streak-row">
+                    <div class="progress-streak-item">
+                      <div class="streak-circle">
+                        <i data-lucide="flame" class="streak-icon animate-pulse"></i>
+                        <span class="number">5</span>
+                      </div>
+                      <span class="label">Journal Streak (Days)</span>
+                    </div>
+                    <div class="progress-streak-item">
+                      <div class="streak-circle">
+                        <i data-lucide="moon" class="streak-icon"></i>
+                        <span class="number">7.4</span>
+                      </div>
+                      <span class="label">Avg Sleep (Hours)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Insights & AI Summaries -->
+              <div class="dashboard-insights-row">
+                <div class="glass-card insights-summary-card">
+                  <div class="card-title-row">
+                    <i data-lucide="sparkles" class="insight-ai-icon"></i>
+                    <h3>MindEase AI Insights</h3>
+                  </div>
+                  <div class="ai-summary-text">
+                    "Tamanna, based on your conversations and logged emotions over the last 3 days, we noticed your stress tends to increase slightly in the evenings, but it significantly drops after your breathing exercises. Practicing mindfulness at 6 PM may help prevent evening stress peaks."
+                  </div>
+                  <div class="insights-recommendations">
+                    <div class="rec-item">
+                      <i data-lucide="check-circle-2" class="rec-icon green"></i>
+                      <span>Schedule a 5-minute breathing session around 6:00 PM today.</span>
+                    </div>
+                    <div class="rec-item">
+                      <i data-lucide="check-circle-2" class="rec-icon lavender"></i>
+                      <span>Write a reflection about your exam preparation in your journal.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- SECTION 2C: MOOD TRACKER VIEW -->
+          <div id="view-mood" class="sub-view">
+            <div class="mood-tracker-container">
+              <div class="section-desc">
+                <h2>How are you feeling right now?</h2>
+                <p>Tracking your mood helps you recognize triggers and emotional patterns over time.</p>
+              </div>
+              
+              <!-- Mood grid cards -->
+              <div class="mood-selection-grid">
+                <div class="mood-card-select" data-mood="happy">
+                  <span class="emoji">😊</span>
+                  <span class="label">Happy</span>
+                </div>
+                <div class="mood-card-select" data-mood="calm">
+                  <span class="emoji">😌</span>
+                  <span class="label">Calm</span>
+                </div>
+                <div class="mood-card-select" data-mood="neutral">
+                  <span class="emoji">😐</span>
+                  <span class="label">Neutral</span>
+                </div>
+                <div class="mood-card-select" data-mood="anxious">
+                  <span class="emoji">😟</span>
+                  <span class="label">Anxious</span>
+                </div>
+                <div class="mood-card-select" data-mood="sad">
+                  <span class="emoji">😢</span>
+                  <span class="label">Sad</span>
+                </div>
+                <div class="mood-card-select" data-mood="angry">
+                  <span class="emoji">😠</span>
+                  <span class="label">Angry</span>
+                </div>
+              </div>
+
+              <!-- Log Mood Confirm Area -->
+              <div class="mood-note-area hidden" id="mood-confirm-box">
+                <h3>What is causing you to feel this way? (Optional)</h3>
+                <textarea id="mood-notes-input" placeholder="Work, family, relationships, health, weather..." rows="3"></textarea>
+                <button class="btn btn-primary" id="log-mood-btn">
+                  <i data-lucide="check"></i>
+                  Log Mood
+                </button>
+              </div>
+
+              <!-- Toast notification on log -->
+              <div id="toast-notification" class="toast hidden">
+                <i data-lucide="check-circle-2"></i>
+                <span id="toast-message">Mood logged successfully!</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2D: BREATHING EXERCISE VIEW -->
+          <div id="view-breathing" class="sub-view">
+            <div class="breathing-view-layout">
+              <div class="breathing-instructions">
+                <h2>4-7-8 Calming Breathing Exercise</h2>
+                <p>This simple breathing pattern acts as a natural nervous system tranquilizer, helping to lower blood pressure, reduce anxiety, and promote instant calm.</p>
+                <div class="breathing-steps-list">
+                  <div class="step-num-row">
+                    <span class="step-num">4s</span>
+                    <span>Inhale deeply through your nose</span>
+                  </div>
+                  <div class="step-num-row">
+                    <span class="step-num">7s</span>
+                    <span>Hold your breath calmly</span>
+                  </div>
+                  <div class="step-num-row">
+                    <span class="step-num">8s</span>
+                    <span>Exhale completely through your mouth</span>
+                  </div>
+                </div>
+                <button class="btn btn-primary btn-lg" id="start-breathing-exercise-btn">
+                  <i data-lucide="play"></i>
+                  Start Breathing
+                </button>
+              </div>
+              
+              <!-- Visual Breathing Circle Frame -->
+              <div class="breathing-circle-frame">
+                <div class="breathing-outer-ring"></div>
+                <div class="breathing-bubble-widget" id="breathing-bubble">
+                  <span class="breathing-phase-timer" id="breathing-phase-timer">Ready</span>
+                </div>
+                <h3 class="breathing-phase-label" id="breathing-phase-label">Click Start to Begin</h3>
+                <p class="breathing-phase-subtext" id="breathing-phase-subtext">Find a comfortable, seated position.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2E: DAILY JOURNAL VIEW -->
+          <div id="view-journal" class="sub-view">
+            <div class="journal-layout">
+              <!-- Left side: Write Entry -->
+              <div class="journal-writer-panel">
+                <h2>Write a Private Journal Entry</h2>
+                <p>Journaling is a therapeutic way to release stress, process your thoughts, and track your growth.</p>
+                <div class="glass-card journal-form">
+                  <input type="text" id="journal-title" placeholder="Give your entry a title...">
+                  <textarea id="journal-content" placeholder="Start typing what's on your mind... What went well today? What challenges did you face?" rows="10"></textarea>
+                  <div class="form-actions">
+                    <span class="privacy-note"><i data-lucide="lock"></i> Private & encrypted locally.</span>
+                    <button class="btn btn-primary" id="save-journal-btn">
+                      <i data-lucide="save"></i>
+                      Save Entry
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right side: History Entries -->
+              <div class="journal-history-panel">
+                <h3>Past Journal Entries</h3>
+                <div class="journal-search-box">
+                  <i data-lucide="search"></i>
+                  <input type="text" id="journal-search-input" placeholder="Search entries...">
+                </div>
+                <div class="journal-list" id="journal-history-list">
+                  <!-- Entries loaded by JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2F: MINDFULNESS LIBRARY VIEW -->
+          <div id="view-activities" class="sub-view">
+            <div class="activities-view-layout">
+              <div class="section-desc">
+                <h2>Mindfulness Library</h2>
+                <p>Select a bite-sized mental wellness activity to ground yourself, feel positive, or unwind.</p>
+              </div>
+
+              <div class="activities-grid">
+                <!-- Activity 1 -->
+                <div class="glass-card activity-card" onclick="activitiesManager.openAffirmationsModal()">
+                  <div class="activity-badge green">Mindfulness</div>
+                  <div class="activity-body">
+                    <h3>Positive Affirmations</h3>
+                    <p>Listen to or read positive affirmations designed to boost self-belief and quiet anxiety.</p>
+                  </div>
+                  <div class="activity-footer">
+                    <span><i data-lucide="clock"></i> 2 min</span>
+                    <span class="action-link">Open Affirmations <i data-lucide="chevron-right"></i></span>
+                  </div>
+                </div>
+
+                <!-- Activity 2 -->
+                <div class="glass-card activity-card" onclick="appRouter.switchSubView('breathing')">
+                  <div class="activity-badge blue">Somatic</div>
+                  <div class="activity-body">
+                    <h3>Deep Breathing</h3>
+                    <p>Align your breath to calm the vagus nerve and activate your parasympathetic system.</p>
+                  </div>
+                  <div class="activity-footer">
+                    <span><i data-lucide="clock"></i> 3 min</span>
+                    <span class="action-link">Start Session <i data-lucide="chevron-right"></i></span>
+                  </div>
+                </div>
+
+                <!-- Activity 3 -->
+                <div class="glass-card activity-card" onclick="activitiesManager.openQuoteModal()">
+                  <div class="activity-badge lavender">Inspirational</div>
+                  <div class="activity-body">
+                    <h3>Inspirational Wisdom</h3>
+                    <p>Take a quiet moment to read a curated positive quote and practice quiet reflection.</p>
+                  </div>
+                  <div class="activity-footer">
+                    <span><i data-lucide="clock"></i> 1 min</span>
+                    <span class="action-link">Read Quote <i data-lucide="chevron-right"></i></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dynamic Modals for Activities -->
+              <div id="activity-modal" class="modal-overlay hidden">
+                <div class="modal-card glass-card">
+                  <div class="modal-header">
+                    <h3 id="modal-title">Activity</h3>
+                    <button class="modal-close-btn" id="close-modal-btn"><i data-lucide="x"></i></button>
+                  </div>
+                  <div class="modal-body" id="modal-body-content">
+                    <!-- Dynamic content -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2G: PROFILE & GOALS VIEW -->
+          <div id="view-profile" class="sub-view">
+            <div class="profile-layout">
+              <div class="profile-details-card glass-card">
+                <div class="profile-header-info">
+                  <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Tamanna" alt="Profile avatar" class="avatar-large">
+                  <div>
+                    <h2>Tamanna</h2>
+                    <p class="profile-meta">MindEase companion since June 2026</p>
+                  </div>
+                </div>
+                
+                <hr>
+                
+                <h3>Personal Wellness Goals</h3>
+                <div class="goals-list" id="goals-checklist-container">
+                  <!-- Checkbox list of goals -->
+                  <label class="checkbox-container">
+                    <input type="checkbox" checked>
+                    <span class="checkmark"></span>
+                    <span>Practice deep breathing daily (3 minutes)</span>
+                  </label>
+                  <label class="checkbox-container">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                    <span>Write in the daily journal before sleep</span>
+                  </label>
+                  <label class="checkbox-container">
+                    <input type="checkbox" checked>
+                    <span class="checkmark"></span>
+                    <span>Maintain average stress score below "Medium"</span>
+                  </label>
+                </div>
+                <div class="add-goal-box">
+                  <input type="text" id="new-goal-input" placeholder="Add a new custom goal...">
+                  <button class="btn btn-secondary btn-sm" id="add-goal-btn">Add Goal</button>
+                </div>
+              </div>
+
+              <div class="profile-settings-card glass-card">
+                <h3>Privacy & Settings</h3>
+                <p class="settings-desc">MindEase processes everything in your browser. All conversations, journal entries, and moods are encrypted and stored in local cache storage.</p>
+                
+                <div class="settings-form">
+                  <div class="settings-row">
+                    <span>Daily Reminder Notification</span>
+                    <label class="toggle-switch">
+                      <input type="checkbox" checked>
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                  <div class="settings-row">
+                    <span>Local Data Encryption</span>
+                    <label class="toggle-switch">
+                      <input type="checkbox" checked disabled>
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                  <hr>
+                  <button class="btn btn-danger btn-sm" id="clear-all-data-btn">Clear All Local Workspace Data</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2H: EMERGENCY SUPPORT VIEW -->
+          <div id="view-emergency" class="sub-view">
+            <div class="emergency-support-view">
+              <div class="emergency-header">
+                <i data-lucide="phone-call" class="emergency-icon-glowing"></i>
+                <h2>Emergency & Crisis Support</h2>
+                <p>If you are in immediate danger, feeling overwhelmed, or experiencing thoughts of self-harm, please reach out to one of the crisis resources below. You do not have to carry this alone.</p>
+              </div>
+
+              <div class="crisis-card-grid">
+                <div class="glass-card crisis-resource-card high-priority">
+                  <div class="resource-title-row">
+                    <span class="priority-label">24/7 CALL OR TEXT</span>
+                    <h3>988 Suicide & Crisis Lifeline</h3>
+                  </div>
+                  <p>Free, confidential, and immediate support in the United States and Canada. Available 24 hours a day, 7 days a week.</p>
+                  <div class="resource-details">
+                    <span><strong>Call / Text:</strong> 988</span>
+                  </div>
+                </div>
+
+                <div class="glass-card crisis-resource-card">
+                  <div class="resource-title-row">
+                    <span class="priority-label">24/7 TEXT ONLY</span>
+                    <h3>Crisis Text Line</h3>
+                  </div>
+                  <p>Connect with a trained volunteer crisis counselor for free support via SMS text messaging.</p>
+                  <div class="resource-details">
+                    <span><strong>Text:</strong> Send <strong>HOME</strong> to 741741</span>
+                  </div>
+                </div>
+
+                <div class="glass-card crisis-resource-card">
+                  <div class="resource-title-row">
+                    <span class="priority-label">INTERNATIONAL</span>
+                    <h3>Befrienders Worldwide</h3>
+                  </div>
+                  <p>An international network of crisis helplines across 40 countries. Find a supportive helpline close to you.</p>
+                  <div class="resource-details">
+                    <a href="https://www.befrienders.org" target="_blank" class="resource-link-btn">Find Local Helpline <i data-lucide="external-link"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Immediate Coping Techniques inside Emergency View -->
+              <div class="immediate-coping-guide glass-card">
+                <h3>Immediate Coping Techniques</h3>
+                <p>If you are experiencing panic, heavy anxiety, or severe stress right now, try this somatic grounding exercise:</p>
+                <div class="coping-grounding-steps">
+                  <div class="grounding-step">
+                    <span class="number">5</span>
+                    <span class="text">Identify <strong>5 things you can see</strong> around you (e.g. a book, a plant, a desk, a light).</span>
+                  </div>
+                  <div class="grounding-step">
+                    <span class="number">4</span>
+                    <span class="text">Identify <strong>4 things you can touch</strong> (e.g. your keyboard, chair fabric, your hair, the cold desk).</span>
+                  </div>
+                  <div class="grounding-step">
+                    <span class="number">3</span>
+                    <span class="text">Identify <strong>3 things you can hear</strong> (e.g. a hum of a computer fan, wind blowing outside, remote cars).</span>
+                  </div>
+                  <div class="grounding-step">
+                    <span class="number">2</span>
+                    <span class="text">Identify <strong>2 things you can smell</strong> (e.g. soap, coffee, fresh rain).</span>
+                  </div>
+                  <div class="grounding-step">
+                    <span class="number">1</span>
+                    <span class="text">Identify <strong>1 thing you can taste</strong> or notice in your mouth.</span>
+                  </div>
+                </div>
+                <button class="btn btn-secondary" onclick="appRouter.switchSubView('breathing')">Go to Deep Breathing Guide</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+    </div>
+  </section>
+
+  <!-- Javascript Modules -->
+  <script src="js/breathing.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
